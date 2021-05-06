@@ -24,7 +24,7 @@ public class Peca {
     }
     int[] getCord()
     {
-        int vetorCord[] = new int[2];
+        int[] vetorCord = new int[2];
         vetorCord[0] = i;
         vetorCord[1] = j; 
         return vetorCord; 
@@ -49,10 +49,6 @@ public class Peca {
         int delta_i = Math.abs(FimI - coordenadas[0]);
         int delta_j = Math.abs(FimJ - coordenadas[1]);
 
-        if (delta_i != delta_j) {
-            return false;
-        }
-
-        return true;
+        return delta_i == delta_j;
     }
 }

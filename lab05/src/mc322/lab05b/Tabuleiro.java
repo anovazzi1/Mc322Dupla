@@ -1,5 +1,4 @@
 package mc322.lab05b;
-import java.io.*;
 
 public class Tabuleiro {
     private int jogadaInvalida = 0;
@@ -180,7 +179,7 @@ public class Tabuleiro {
                 {
                     jogo.append(coluna).append(linha).append("_\n");
                 }
-                else if(pecas[i][j].getClass().getName().equals("Peao"))
+                else if(pecas[i][j].getClass().getSimpleName().equals("Peao"))
                 {
                     if(pecas[i][j].getCor())
                     {
@@ -206,20 +205,19 @@ public class Tabuleiro {
         }
         return jogo.toString();
     }
-    void exportarArquivo(String caminho) throws IOException
-    {
-        String inicio = CriarCsv();
-        FileWriter arq = new FileWriter(caminho);
-        PrintWriter gravar = new PrintWriter(arq);
+    void exportarArquivo(String caminho) {
+        String[] estado = new String[1];
+        CSVHandling csv = new CSVHandling();
+        csv.setDataExport(caminho);
         if(jogadaInvalida == 0)
         {
-            gravar.printf(inicio);
+            estado[0] = CriarCsv();
         }
         else
         {
-            gravar.printf("erro"); 
+            estado[0] = "erro";
         }
-        arq.close();
+        csv.exportState(estado);
     }
     void imprimirTabuleiro(String[] jogadas)
     {
@@ -238,35 +236,21 @@ public class Tabuleiro {
     String criarString() //cria strings para o vetor
     {
         StringBuilder jogo = new StringBuilder();
-        for(int i = 0; i< pecas.length; i++)
-        {
-            for(int j = 0; j< pecas[0].length; i++)
-            {
-                if(!pecas[i][j].getViva())
-                {
+        for (Peca[] peca : pecas) {
+            for (int j = 0; j < pecas[0].length; j++) {
+                if (!peca[j].getViva()) {
                     jogo.append("-");
-                }
-                else
-                {
-                    if(pecas[i][j].getClass().getSimpleName().equals("Peao"))
-                    {
-                        if(pecas[i][j].getCor())
-                        {
+                } else {
+                    if (peca[j].getClass().getSimpleName().equals("Peao")) {
+                        if (peca[j].getCor()) {
                             jogo.append("b");
-                        }
-                        else
-                        {
+                        } else {
                             jogo.append("p");
                         }
-                    }
-                    else
-                    {
-                        if(pecas[i][j].getCor())
-                        {
+                    } else {
+                        if (peca[j].getCor()) {
                             jogo.append("B");
-                        }
-                        else
-                        {
+                        } else {
                             jogo.append("P");
                         }
                     }

@@ -10,9 +10,7 @@ public class Peao extends Peca {
             int delta_i = Math.abs(FimI - coordenadas[0]);
             int delta_j = Math.abs(FimJ - coordenadas[1]);
 
-            if (delta_j > 2 && delta_i > 2) {
-                return false;
-            }
+            return delta_j <= 2 || delta_i <= 2;
         }
         return true;
     }

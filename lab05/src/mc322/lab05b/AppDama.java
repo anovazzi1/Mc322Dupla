@@ -1,5 +1,4 @@
 package mc322.lab05b;
-import java.io.IOException;
 
 public class AppDama {
     static String[] executaJogo(String entrada, String saida) {
@@ -13,8 +12,7 @@ public class AppDama {
         jogo.exportarArquivo(saida);
         return vetor.saidaVetor(jogadas);
     }
-    public static void main(String[] args)  throws IOException
-    {
+    public static void main(String[] args) {
         String[] jogadas = AppDama.executaJogo(args[0], args[1]);
     }
 }
