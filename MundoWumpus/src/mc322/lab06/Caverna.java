@@ -15,7 +15,6 @@ public class Caverna {
         }
     }
 
-
     public void preencherSalas(String[] posicao, Component[] componentes)
     {
         criarSalas();
@@ -25,8 +24,14 @@ public class Caverna {
             I = Integer.parseInt(separador[0]);
             J = Integer.parseInt(separador[1]);
             salas[I-1][J-1].setComponent(componentes[k]);
+            salas[I-1][J-1].alocated();
             k++;
         }
+    }
+
+    public void printState()
+    {
+
     }
 
 }

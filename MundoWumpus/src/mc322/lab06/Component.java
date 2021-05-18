@@ -8,4 +8,5 @@ public class Component {
         jogo = escolhida;
     }
     static  public  Caverna getCave(){return jogo;}
+
 }

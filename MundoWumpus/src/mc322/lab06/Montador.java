@@ -9,6 +9,7 @@ public class Montador {
     static public int buracos=0, wupus=0, ouro=0, hero=0;
     static private String caminho;
     static private String[][] coord;
+    private Player heroi;
 
     static public Boolean VerificarCsv(String caminho)
     {
@@ -39,7 +40,8 @@ public class Montador {
                 switch (coord[i][1])
                 {
                     case "P":
-                        componentes[j] = new Player();
+                        heroi = new Player();
+                        componentes[j] = heroi;
                         vetorCoord[j] = coord[i][0];
                         j++;
                         break;
@@ -98,4 +100,5 @@ public class Montador {
         return true;
     }
 
+    public Player getPlayer() {return heroi;}
 }

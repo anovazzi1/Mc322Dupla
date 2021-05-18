@@ -10,9 +10,13 @@ public class AppMundoWumpus {
         }
         else
         {
-            Montador jogador = new Montador();
-            Caverna jogo = jogador.MontarCaverna();
-            Component.setCave(jogo);
+            Montador maker = new Montador();
+            Controle  jogador = new Controle();
+            Caverna cave = maker.MontarCaverna();
+            Component.setCave(cave);
+            jogador.setPlayer(maker.getPlayer());
+            jogador.setName();
+            System.out.println(jogador.getName());
         }
     }
 }
