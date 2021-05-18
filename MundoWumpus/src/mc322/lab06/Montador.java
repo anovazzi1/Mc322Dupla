@@ -34,7 +34,7 @@ public class Montador {
         int j=0;
         for(int i = 0;i< coord.length;i++)
         {
-            if(coord[i][1] == "P" || coord[i][1] == "O"||coord[i][1]== "B"||coord[i][1]== "W")
+            if(coord[i][1].equals("P") || coord[i][1].equals("O")||coord[i][1].equals("B")||coord[i][1].equals("W"))
             {
                 switch (coord[i][1])
                 {

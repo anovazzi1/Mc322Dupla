@@ -19,16 +19,13 @@ public class Caverna {
     public void preencherSalas(String[] posicao, Component[] componentes)
     {
         criarSalas();
-        for(int i = 0;i<salas.length;i++)
+        for(int i = 0;i< posicao.length-1;i++)
         {
-            for(int j=0;j< salas[0].length;j++)
-            {
-                separador = posicao[k].split(":");
-                I = Integer.parseInt(separador[0]);
-                J = Integer.parseInt(separador[1]);
-                salas[I][J].setComponent(componentes[k]);
-                k++;
-            }
+            separador = posicao[k].split(":");
+            I = Integer.parseInt(separador[0]);
+            J = Integer.parseInt(separador[1]);
+            salas[I-1][J-1].setComponent(componentes[k]);
+            k++;
         }
     }
 
