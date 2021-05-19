@@ -1,16 +1,15 @@
 package mc322.lab06;
 
-import jdk.dynalink.beans.StaticClass;
-
 public class Montador {
-    private Caverna cave = new Caverna();
-    private Component[] componentes = new Component[6];
-    private String[] vetorCoord = new String[6];
-    static public int buracos=0, wupus=0, ouro=0, hero=0;
+    private final Caverna cave = new Caverna();
+    private final Component[] componentes = new Component[6];
+    private final String[] vetorCoord = new String[6];
+    static public int buracos=0, wumpus =0, ouro=0, hero=0;
     static private String caminho;
     static private String[][] coord;
     private Player heroi;
 
+    //  Funcao responsável por mapear as coordenadas do mapa do CSV e verificar a validade do mapa do jogo  //
     static public Boolean VerificarCsv(String caminho)
     {
         String[][] cordenadas;
@@ -18,50 +17,57 @@ public class Montador {
         local.setDataSource(caminho);
         cordenadas = local.requestCommands();
         coord = cordenadas;
-        if(VerificarCsv())
-        {
-            return true;
-        }
-        else
+        return VerificarCsv();
+    }
+
+    // Funcao verifica a validade do mapa do jogo //
+    static private Boolean VerificarCsv()
+    {
+        if(!coord[0][1].equals("P"))    //Wumpus não está na posição inicial
         {
             return false;
         }
 
+        for (String[] strings : coord) {
+            switch (strings[1]) {
+                case "P" -> hero++;
+                case "W" -> wumpus++;
+                case "O" -> ouro++;
+                case "B" -> buracos++;
+            }
+        }
+        return hero == 1 && wumpus == 1 && ouro == 1 && buracos >= 2 && buracos <= 3;   //Verifica as condições básicas do jogo
     }
-
 
      public Caverna MontarCaverna()
     {
         int j=0;
-        for(int i = 0;i< coord.length;i++)
-        {
-            if(coord[i][1].equals("P") || coord[i][1].equals("O")||coord[i][1].equals("B")||coord[i][1].equals("W"))
-            {
-                switch (coord[i][1])
-                {
-                    case "P":
+        for (String[] strings : coord) {
+            if (strings[1].equals("P") || strings[1].equals("O") || strings[1].equals("B") || strings[1].equals("W")) {
+                switch (strings[1]) {
+                    case "P" -> {
                         heroi = new Player();
                         componentes[j] = heroi;
-                        vetorCoord[j] = coord[i][0];
+                        vetorCoord[j] = strings[0];
                         j++;
-                        break;
-                    case "W":
+                    }
+                    case "W" -> {
                         componentes[j] = new Wumpus();
                         System.out.println(Wumpus.getCave());
-                        vetorCoord[j] = coord[i][0];
+                        vetorCoord[j] = strings[0];
                         j++;
-                        break;
-                    case "O":
+                    }
+                    case "O" -> {
                         componentes[j] = new Gold();
                         System.out.println(Gold.getCave());
-                        vetorCoord[j] = coord[i][0];
+                        vetorCoord[j] = strings[0];
                         j++;
-                        break;
-                    case "B":
+                    }
+                    case "B" -> {
                         componentes[j] = new Hole();
-                        vetorCoord[j] = coord[i][0];
+                        vetorCoord[j] = strings[0];
                         j++;
-                        break;
+                    }
                 }
             }
         }
@@ -69,36 +75,7 @@ public class Montador {
         return cave;
     }
 
-    static private Boolean VerificarCsv()
-    {
-        if(coord[0][1].equals("P")) //verificacao ta falhando não sei pq
-        {
-            return false;
-        }
-        for(int i =0;i< coord.length;i++)
-        {
-            switch (coord[i][1])
-            {
-                case "P":
-                    hero++;
-                    break;
-                case "W":
-                    wupus++;
-                    break;
-                case "O":
-                    ouro++;
-                    break;
-                case "B":
-                    buracos++;
-                    break;
-            }
-        }
-        if(hero !=1|| wupus!= 1 || ouro !=1|| buracos<2 || buracos >3)
-        {
-            return false;
-        }
-        return true;
+    public Player getPlayer() {
+        return heroi;
     }
-
-    public Player getPlayer() {return heroi;}
 }
