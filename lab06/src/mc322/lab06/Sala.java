@@ -28,4 +28,7 @@ public class Sala {
 
     public boolean getempty(){return empty;}
 
+    public Component[] getComponent() {return components;}
+
+    public int getHead() {return head;}
 }

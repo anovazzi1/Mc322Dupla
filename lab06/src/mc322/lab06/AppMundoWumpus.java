@@ -16,7 +16,8 @@ public class AppMundoWumpus {
             Component.setCave(cave);
             jogador.setPlayer(maker.getPlayer());
             jogador.setName();
-            System.out.println(jogador.getName());
+            cave.printState();
+            System.out.println("Player" + jogador.getName());
         }
     }
 }
