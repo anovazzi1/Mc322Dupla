@@ -11,13 +11,14 @@ public class AppMundoWumpus {
         else
         {
             Montador maker = new Montador();
-            Controle  jogador = new Controle();
             Caverna cave = maker.MontarCaverna();
-            Component.setCave(cave);
-            jogador.setPlayer(maker.getPlayer());
-            jogador.setName();
-            cave.printState();
-            System.out.println("Player" + jogador.getName());
+            Controle  jogo = new Controle(maker.getPlayer());
+
+            while (jogo.getStatusJogo()) {
+                cave.printState();
+                jogo.printPlayer();
+                jogo.getAction();
+            }
         }
     }
 }
