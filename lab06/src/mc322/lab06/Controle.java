@@ -7,7 +7,6 @@ public class Controle {
     private String statusJogo;
     private final Scanner keyboard = new Scanner(System.in);
 
-
     public Controle(Player player){
         setPlayer(player);
         setStatusJogo("Em andamento");
@@ -20,8 +19,6 @@ public class Controle {
                System.out.println("Volte Sempre!");
                break;
            case "Voce perdeu =( ...":
-               System.out.println(status);
-               break;
            case "Voce ganhou =D !!!":
                System.out.println(status);
                break;
@@ -46,37 +43,47 @@ public class Controle {
     }
 
     public void printPlayer(){
-        System.out.println("Player: " + jogador.getName());
-        System.out.println("Score: " + jogador.getScore());
-        System.out.printf("%nAção:%n");
+        jogador.printPlayer();
     }
 
     public void getAction(){
+        System.out.printf("%nAção:%n");
         String action = keyboard.nextLine();
 
         switch (action){
             case "w":
-//               jogador.moverCima();
-                setScore(-15);
-                break;
             case "s":
-//                jogador.moverBaixo();
-                setScore(-15);
-                break;
             case "d":
-//                jogador.moverDireita();
-                setScore(-15);
-                break;
             case "a":
-//                jogador.moverEsquerda();
-                setScore(-15);
+                boolean flechaAtiva = false;
+                if (jogador.FlechaAtiva()){
+                     flechaAtiva = true;
+                }
+                String jogada = jogador.mover(action, flechaAtiva);
+
+                if (!jogada.equals("movimento inválido")){
+                    setScore(-15);
+
+                    if(jogada.equals("perdeu")){
+                        setScore(-1000);
+                        setStatusJogo("Voce perdeu =( ...");
+                    }
+
+                    else if(jogada.equals("ganhou")){
+                        setScore(500);
+                        setStatusJogo("Voce ganhou =D !!!");
+                    }
+                }
                 break;
             case "k":
-//                jogador.equipaFlecha();
-                setScore(-100);
+                if (jogador.equipaFlecha()){
+                    setScore(-100);
+                }
                 break;
             case "c":
-//                jogador.coletaOuro();
+                if(jogador.coletaOuro()) {
+                    setScore(1000);
+                }
                 break;
             case "q":
                 setStatusJogo("Jogador Saiu do Jogo");

@@ -1,4 +1,4 @@
 package mc322.lab06;
 
-public class Fedor extends SubComponent {
+public class Fedor extends Component {
 }

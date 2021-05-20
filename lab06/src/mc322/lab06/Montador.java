@@ -5,7 +5,6 @@ public class Montador {
     private final Component[] componentes = new Component[6];
     private final String[] vetorCoord = new String[6];
     static public int buracos=0, wumpus =0, ouro=0, hero=0;
-    static private String caminho;
     static private String[][] coord;
     private Player heroi;
 
@@ -53,13 +52,11 @@ public class Montador {
                     }
                     case "W" -> {
                         componentes[j] = new Wumpus();
-                        System.out.println(Wumpus.getCave());
                         vetorCoord[j] = strings[0];
                         j++;
                     }
                     case "O" -> {
                         componentes[j] = new Gold();
-                        System.out.println(Gold.getCave());
                         vetorCoord[j] = strings[0];
                         j++;
                     }
@@ -71,6 +68,7 @@ public class Montador {
                 }
             }
         }
+        Component.setCave(cave);
         cave.preencherSalas(vetorCoord, componentes);
         return cave;
     }

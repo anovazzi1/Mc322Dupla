@@ -1,12 +1,17 @@
 package mc322.lab06;
 
 public class Component {
-   static Caverna jogo;
+    protected static Caverna caverna;
+    protected int coordI, coordJ;
 
-    static public void setCave(Caverna escolhida)
+
+    static public void setCave(Caverna cave)
     {
-        jogo = escolhida;
+        caverna = cave;
     }
-    static  public  Caverna getCave(){return jogo;}
 
+    public void setCoordinates(int i, int j){
+        coordI = i;
+        coordJ = j;
+    }
 }
